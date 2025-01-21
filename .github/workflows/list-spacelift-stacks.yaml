@@ -34,6 +34,7 @@ jobs:
           spacectl whoami
           spacectl stack list
           TF_API_TOKEN=$(echo "api:${SPACELIFT_API_KEY_ID}:${SPACELIFT_API_KEY_SECRET}" | base64)
+          echo $TF_API_TOKEN
           echo "TF_API_TOKEN=$TF_API_TOKEN" >> $GITHUB_ENV
       
       - uses: opentofu/setup-opentofu@v1
