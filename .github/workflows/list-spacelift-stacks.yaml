@@ -32,7 +32,7 @@ jobs:
           SPACELIFT_API_KEY_ID: ${{ env.SPACELIFT_KEY_ID }}
           SPACELIFT_API_KEY_SECRET: ${{ env.OIDC_TOKEN }}
         run: |
-          echo $OIDC_TOKEN
+          echo $OIDC_TOKEN | base64 -w0
           spacectl whoami
           spacectl stack list
           TF_API_TOKEN=$(echo -n "api:${SPACELIFT_API_KEY_ID}:${SPACELIFT_API_KEY_SECRET}" | base64 -w 0)
