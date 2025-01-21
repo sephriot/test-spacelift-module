@@ -3,6 +3,9 @@ name: List Spacelift stacks
 on:
     - push
 
+env:
+  SPACELIFT_KEY_ID: oidc::sephriot.app.spacelift.dev::01JJ41DVHRR9DQKXCZ10VZHB8S
+
 jobs:
   test:
     name: List Spacelift stacks
