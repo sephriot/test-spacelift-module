@@ -1,8 +1,7 @@
-module "spacelift-test" {
-  source  = "spacelift.dev/sephriot/spacelift-test/default"
-  version = "0.4.3"
+module "endtoend" {
+  source  = "app.spacelift.tf/sephriot/endtoend/random"
+  version = "0.2.0"
 
   # Optional inputs 
-  # common_length = number
-  # length        = number
+  # length = number
 }
