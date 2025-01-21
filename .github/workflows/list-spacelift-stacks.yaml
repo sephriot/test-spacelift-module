@@ -1,0 +1,32 @@
+name: List Spacelift stacks
+
+on:
+    - push
+
+jobs:
+  test:
+    name: List Spacelift stacks
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: Generate token
+        run: |
+          OIDC_TOKEN=$(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sephriot.app.spacelift.dev" | jq --raw-output '.value')
+          echo "OIDC_TOKEN=$OIDC_TOKEN" >> $GITHUB_ENV
+
+      - name: Install spacectl
+        uses: spacelift-io/setup-spacectl@main
+
+      - name: List stacks
+        env:
+          # You will want to replace this endpoint (and the audience) with your
+          # own Spacelift account's endpoint.
+          SPACELIFT_API_KEY_ENDPOINT: https://sephriot.app.spacelift.dev
+          SPACELIFT_API_KEY_ID: ${{ env.SPACELIFT_KEY_ID }}
+          SPACELIFT_API_KEY_SECRET: ${{ env.OIDC_TOKEN }}
+        run: |
+          spacectl whoami
+          spacectl stack list
