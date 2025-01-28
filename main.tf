@@ -1,5 +1,5 @@
 module "endtoend" {
-  source  = "app.spacelift.dev/sephriot/endtoend/random"
+  source  = "spacelift.dev/sephriot/endtoend-dev/default"
   version = "0.2.0"
 
   # Optional inputs 
