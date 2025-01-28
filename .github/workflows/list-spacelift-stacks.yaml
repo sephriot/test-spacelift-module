@@ -4,7 +4,7 @@ on:
     - push
 
 env:
-  SPACELIFT_KEY_ID: oidc::sephriot.app.spacelift.dev::01JJ41DVHRR9DQKXCZ10VZHB8S
+  SPACELIFT_KEY_ID: oidc::sephriot.app.spacelift.dev::01JJP4GG8Q6X0W02F0JC6Y5RYZ
 
 jobs:
   test:
@@ -18,11 +18,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Generate token
         run: |
-          OIDC_TOKEN=$(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sephriot.app.spacelift.tf" | jq --raw-output '.value')
+          OIDC_TOKEN=$(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sephriot.app.spacelift.dev" | jq --raw-output '.value')
           echo "OIDC_TOKEN=$OIDC_TOKEN" >> $GITHUB_ENV
-          echo $ACTIONS_ID_TOKEN_REQUEST_TOKEN | base64 -w0
-          echo OK
-          echo $ACTIONS_ID_TOKEN_REQUEST_URL | base64 -w0
 
       - name: Install spacectl
         uses: spacelift-io/setup-spacectl@main
